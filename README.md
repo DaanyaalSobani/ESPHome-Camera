@@ -29,11 +29,18 @@ This project sets up an ESPHome camera interface with HTTPS support using Nginx 
    - Set appropriate permissions for the certificate files
 
 3. Import the Root CA certificate in your browser:
-   - Open Chrome and go to `chrome://settings/security`
-   - Click on "Manage certificates"
-   - Go to the "Authorities" tab
-   - Click "Import"
-   - Select the `certs/root-ca.crt` file (NOT certificate.crt)
+   - Option 1: Download from the server
+     - Start the containers (step 4)
+     - Visit `https://<your-ip>:6052/root-ca.crt` to download the certificate
+     - Import the downloaded certificate
+   - Option 2: Import directly from filesystem
+     - Open Chrome and go to `chrome://settings/security`
+     - Click on "Manage certificates"
+     - Go to the "Authorities" tab
+     - Click "Import"
+     - Select the `certs/root-ca.crt` file (NOT certificate.crt)
+   
+   After importing:
    - Check all boxes when prompted and click "OK"
    - Restart Chrome completely
 
@@ -58,7 +65,7 @@ After setup, you can access your ESPHome interface using either:
 ## Accessing from Other Devices
 
 To access the interface from other devices on your network:
-1. Copy the `certs/root-ca.crt` file to the device
+1. Download the root CA certificate by visiting `https://<your-lan-ip>:6052/root-ca.crt`
 2. Import it into the device's certificate store
 3. Access using `https://<your-lan-ip>:6052`
 

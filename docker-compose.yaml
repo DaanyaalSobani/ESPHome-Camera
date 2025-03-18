@@ -1,5 +1,18 @@
-version: '3'
 services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "6052:6052"
+    depends_on:
+      - esphome
+    restart: always
+    networks:
+      - esphome_network
+
   esphome:
     container_name: esphome
     image: ghcr.io/esphome/esphome
@@ -8,7 +21,16 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     privileged: true
-    network_mode: host
+    expose:
+      - "6052"
     environment:
       - USERNAME=daanyaal
       - PASSWORD=1505
+      - PORT=6052
+      - HOST=0.0.0.0
+    networks:
+      - esphome_network
+
+networks:
+  esphome_network:
+    driver: bridge

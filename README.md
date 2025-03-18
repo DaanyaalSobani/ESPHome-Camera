@@ -28,10 +28,24 @@ This project sets up an ESPHome camera interface with HTTPS support using Nginx 
    - Automatically detect and include your LAN IP in the certificate
    - Set appropriate permissions for the certificate files
 
-3. Import the Root CA certificate in your browser:
+3. Import the Root CA certificate:
+
+   ### Windows:
+   1. Download the certificate from `https://<your-lan-ip>:6052/root-ca.crt`
+   2. Double-click the downloaded `root-ca.crt` file
+   3. Click "Install Certificate"
+   4. Select "Local Machine" (requires admin rights)
+   5. Click "Next"
+   6. Select "Place all certificates in the following store"
+   7. Click "Browse"
+   8. Select "Trusted Root Certification Authorities"
+   9. Click "OK", then "Next", then "Finish"
+   10. Restart your browser
+
+   ### Chrome/Linux:
    - Option 1: Download from the server
      - Start the containers (step 4)
-     - Visit `https://<your-ip>:6052/root-ca.crt` to download the certificate
+     - Visit `https://<your-lan-ip>:6052/root-ca.crt`
      - Import the downloaded certificate
    - Option 2: Import directly from filesystem
      - Open Chrome and go to `chrome://settings/security`
@@ -42,7 +56,7 @@ This project sets up an ESPHome camera interface with HTTPS support using Nginx 
    
    After importing:
    - Check all boxes when prompted and click "OK"
-   - Restart Chrome completely
+   - Restart your browser completely
 
 4. Start the containers:
    ```bash
